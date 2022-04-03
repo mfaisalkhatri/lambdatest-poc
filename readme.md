@@ -1,8 +1,5 @@
 
-<div>
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)][home]
-</div>
-
+![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
 
 ## Don't forget to give a :star: to make the project popular.
 
