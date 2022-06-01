@@ -5,7 +5,7 @@
         <parameter name="browser" value="chrome"/>
         <parameter name="platform" value="WIN10"/>
         <classes>
-            <class name="io.github.mfaisalkhatri.tests.FormAuthenticationTests">
+            <class name="io.github.mfaisalkhatri.webautomation.tests.FormAuthenticationTests">
                 <methods>
                     <include name="loginTests"/>
                 </methods>
@@ -16,7 +16,19 @@
         <parameter name="browser" value="firefox"/>
         <parameter name="platform" value="WIN10"/>
         <classes>
-            <class name="io.github.mfaisalkhatri.tests.FormAuthenticationTests">
+            <class name="io.github.mfaisalkhatri.webautomation.tests.FormAuthenticationTests">
+                <methods>
+                    <include name="loginTests"/>
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Test -->
+    <test name="Swag Labs app test - Mobile Automation">
+        <parameter name="platformName" value="ANDROID"/>
+        <parameter name="device" value="One Plus 6T"/>
+        <parameter name="version" value="11"/>
+        <classes>
+            <class name="io.github.mfaisalkhatri.mobileautomation.tests.SwagLabAppTests">
                 <methods>
                     <include name="loginTests"/>
                 </methods>

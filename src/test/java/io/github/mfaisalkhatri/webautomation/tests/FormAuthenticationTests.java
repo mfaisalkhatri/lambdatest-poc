@@ -1,13 +1,13 @@
-package io.github.mfaisalkhatri.tests;
+package io.github.mfaisalkhatri.webautomation.tests;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import io.github.mfaisalkhatri.driversetup.BaseTest;
-import io.github.mfaisalkhatri.pages.FormAuthentication;
-import io.github.mfaisalkhatri.pages.MainPage;
-import io.github.mfaisalkhatri.pages.SecurePage;
+import io.github.mfaisalkhatri.webautomation.driversetup.BaseTest;
+import io.github.mfaisalkhatri.webautomation.pages.FormAuthentication;
+import io.github.mfaisalkhatri.webautomation.pages.MainPage;
+import io.github.mfaisalkhatri.webautomation.pages.SecurePage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;

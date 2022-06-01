@@ -1,4 +1,4 @@
-package io.github.mfaisalkhatri.pages;
+package io.github.mfaisalkhatri.webautomation.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
