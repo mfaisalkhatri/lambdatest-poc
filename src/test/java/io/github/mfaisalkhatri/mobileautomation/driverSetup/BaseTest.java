@@ -37,9 +37,9 @@ public class BaseTest {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("build", "Android apk tests");
         capabilities.setCapability("name", "Swag mobile app automation tests");
-        capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("deviceName", "Galaxy S9 Plus");
-        capabilities.setCapability("platformVersion","10");
+        capabilities.setCapability("platformName", platform);
+        capabilities.setCapability("deviceName", device);
+        capabilities.setCapability("platformVersion",version);
         capabilities.setCapability("appiumVersion","1.22.1");
         capabilities.setCapability("appium:app","lt://APP10011121654063254314917");
         capabilities.setCapability("isRealMobile", true);

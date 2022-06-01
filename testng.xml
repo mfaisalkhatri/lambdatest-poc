@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Lambda tests Parallel Tests flow" parallel="tests" thread-count="2">
-    <test name="Form Authentication Tests - Chrome" >
+    <test name="Form Authentication Tests - Chrome" enabled="false" >
         <parameter name="browser" value="chrome"/>
         <parameter name="platform" value="WIN10"/>
         <classes>
@@ -12,7 +12,7 @@
             </class>
         </classes>
     </test> <!-- Test -->
-    <test name="Form Authentication Tests - Firefox">
+    <test name="Form Authentication Tests - Firefox" enabled="false">
         <parameter name="browser" value="firefox"/>
         <parameter name="platform" value="WIN10"/>
         <classes>
@@ -23,9 +23,21 @@
             </class>
         </classes>
     </test> <!-- Test -->
-    <test name="Swag Labs app test - Mobile Automation">
+    <test name="Swag Labs app test - Mobile Automation - Galaxy S9">
         <parameter name="platformName" value="ANDROID"/>
-        <parameter name="device" value="One Plus 6T"/>
+        <parameter name="device" value="Galaxy S9 Plus"/>
+        <parameter name="version" value="10"/>
+        <classes>
+            <class name="io.github.mfaisalkhatri.mobileautomation.tests.SwagLabAppTests">
+                <methods>
+                    <include name="loginTests"/>
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Test -->
+    <test name="Swag Labs app test - Mobile Automation - Galaxy S10">
+        <parameter name="platformName" value="ANDROID"/>
+        <parameter name="device" value="Galaxy S10"/>
         <parameter name="version" value="11"/>
         <classes>
             <class name="io.github.mfaisalkhatri.mobileautomation.tests.SwagLabAppTests">
@@ -35,4 +47,5 @@
             </class>
         </classes>
     </test> <!-- Test -->
+
 </suite> <!-- Suite -->
