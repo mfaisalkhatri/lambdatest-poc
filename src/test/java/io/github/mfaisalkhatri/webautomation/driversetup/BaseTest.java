@@ -1,4 +1,4 @@
-package io.github.mfaisalkhatri.driversetup;
+package io.github.mfaisalkhatri.webautomation.driversetup;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -28,7 +28,7 @@ public class BaseTest {
         String URL = "@hub.lambdatest.com/wd/hub";
 
         DesiredCapabilities capability = new DesiredCapabilities ();
-        capability.setPlatform (platform);
+        capability.setCapability ("platform", platform);
         capability.setBrowserName (browser);
         capability.setCapability ("build", "Cross Browser Tests");
         capability.setCapability ("name", "Parallel Testing on Chrome and Firefox");
@@ -38,7 +38,7 @@ public class BaseTest {
         capability.setCapability ("console", true);//to enable console logs
 
         driver.set (new RemoteWebDriver (new URL ("https://" + ltUserName + ":" + ltAccessToken + URL), capability));
-        setupBrowserTimeouts ();
+     //  setupBrowserTimeouts ();
 
     }
     public WebDriver getDriver () {
@@ -54,16 +54,16 @@ public class BaseTest {
 
     }
 
-    private void setupBrowserTimeouts () {
-
-        getDriver ()
-            .manage ()
-            .timeouts ()
-            .implicitlyWait (Duration.ofSeconds (60));
-
-        getDriver ()
-            .manage ()
-            .timeouts ()
-            .pageLoadTimeout (Duration.ofSeconds (60));
-    }
+//    private void setupBrowserTimeouts () {
+//
+//        getDriver ()
+//            .manage ()
+//            .timeouts ()
+//            .implicitlyWait (Duration.ofSeconds (60));
+//
+//        getDriver ()
+//            .manage ()
+//            .timeouts ()
+//            .pageLoadTimeout (Duration.ofSeconds (60));
+//    }
 }

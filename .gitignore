@@ -1,6 +1,7 @@
 # IntelliJ IDEA
 /.idea/
 *.iml
+*.json
 
 # Other output folders
 /target/
