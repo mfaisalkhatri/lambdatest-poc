@@ -3,13 +3,16 @@ package io.github.mfaisalkhatri.webautomation.driversetup;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.openqa.selenium.Platform;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
 public class BaseTest {
@@ -20,30 +23,42 @@ public class BaseTest {
     private static final String                 URL           = "@hub.lambdatest.com/wd/hub";
 
     public BaseTest () {
-        driver = new ThreadLocal<WebDriver> ();
+        driver = new ThreadLocal<> ();
     }
 
     public WebDriver getDriver () {
         return driver.get ();
     }
 
-    @Parameters ({ "platform", "browser" })
-    @BeforeClass
-    public void setupBrowser (Platform platform, String browser) throws MalformedURLException {
+    @Parameters ({ "browser", "platform" })
+    @BeforeMethod
+    public void setupBrowser (String browser, String platform) throws MalformedURLException {
+        MutableCapabilities options;
 
-        DesiredCapabilities capability = new DesiredCapabilities ();
-        capability.setCapability ("platform", platform);
-        capability.setBrowserName (browser);
-        capability.setCapability ("build", "Cross Browser Tests");
-        capability.setCapability ("name", "Parallel Testing on Chrome and Firefox");
-        capability.setCapability ("network", true);
-        capability.setCapability ("visual", true);
-        capability.setCapability ("video", true);
-        capability.setCapability ("console", true);
+        switch (browser.toLowerCase ()) {
+            case "chrome":
+                ChromeOptions chromeOptions = new ChromeOptions ();
+                chromeOptions.setPlatformName (platform);
+                chromeOptions.setBrowserVersion ("latest");
+                chromeOptions.setCapability ("LT:Options", getLTOptions (browser));
+                options = chromeOptions;
+                break;
 
-        driver.set (new RemoteWebDriver (new URL ("https://" + LT_USERNAME + ":" + LT_ACCESS_KEY + URL), capability));
+            case "firefox":
+                FirefoxOptions firefoxOptions = new FirefoxOptions ();
+                firefoxOptions.setPlatformName (platform);
+                firefoxOptions.setBrowserVersion ("latest");
+                firefoxOptions.setCapability ("LT:Options", getLTOptions (browser));
+                options = firefoxOptions;
+                break;
+
+            default:
+                throw new IllegalArgumentException ("Unsupported browser: " + browser);
+        }
+
+        driver.set (new RemoteWebDriver (new URL ("https://" + LT_USERNAME + ":" + LT_ACCESS_KEY + URL), options));
+
         setupBrowserTimeouts ();
-
     }
 
     @AfterClass
@@ -52,11 +67,23 @@ public class BaseTest {
             getDriver ().quit ();
             driver.remove ();
         }
+    }
 
+    private Map<String, Object> getLTOptions (String browserName) {
+        Map<String, Object> ltOptions = new HashMap<> ();
+        ltOptions.put ("username", LT_USERNAME);
+        ltOptions.put ("accessKey", LT_ACCESS_KEY);
+        ltOptions.put ("project", "Cross Browser Tests Demo");
+        ltOptions.put ("build", "Cross Browser verification");
+        ltOptions.put ("name", "Parallel Test - " + browserName);
+        ltOptions.put ("console", true);
+        ltOptions.put ("network", true);
+        ltOptions.put ("visual", true);
+        ltOptions.put ("video", true);
+        return ltOptions;
     }
 
     private void setupBrowserTimeouts () {
-
         getDriver ().manage ()
             .timeouts ()
             .implicitlyWait (Duration.ofSeconds (60));

@@ -1,6 +1,6 @@
 package io.github.mfaisalkhatri.mobileautomation.pages;
 
-import io.appium.java_client.MobileBy;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -16,7 +16,7 @@ public class LoginPage {
     }
 
     public WebElement loginBtn () {
-        return driver.findElement (MobileBy.AccessibilityId ("test-LOGIN"));
+        return driver.findElement (AppiumBy.accessibilityId ("test-LOGIN"));
     }
 
     public void loginIntoApp (String username, String password) {
@@ -30,10 +30,10 @@ public class LoginPage {
     }
 
     public WebElement passwordField () {
-        return driver.findElement (MobileBy.AccessibilityId ("test-Password"));
+        return driver.findElement (AppiumBy.accessibilityId ("test-Password"));
     }
 
     public WebElement userNameField () {
-        return driver.findElement (MobileBy.AccessibilityId ("test-Username"));
+        return driver.findElement (AppiumBy.accessibilityId ("test-Username"));
     }
 }

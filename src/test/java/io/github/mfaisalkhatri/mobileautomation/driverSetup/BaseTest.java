@@ -2,7 +2,8 @@ package io.github.mfaisalkhatri.mobileautomation.driverSetup;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
+import java.util.HashMap;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.Platform;
@@ -17,7 +18,10 @@ import org.testng.annotations.Parameters;
  */
 public class BaseTest {
 
-    public static ThreadLocal<AppiumDriver> driver;
+    public static        ThreadLocal<AppiumDriver> driver;
+    private static final String                    LT_ACCESS_KEY = System.getenv ("LT_ACCESS_KEY");
+    private static final String                    LT_USERNAME   = System.getenv ("LT_USERNAME");
+    private static final String                    URL           = "@hub.lambdatest.com/wd/hub";
 
     public BaseTest () {
         driver = new ThreadLocal<> ();
@@ -30,24 +34,22 @@ public class BaseTest {
     @Parameters ({ "platformName", "device", "version" })
     @BeforeClass
     public void setupBrowser (Platform platform, String device, String version) throws MalformedURLException {
-        String ltUserName = System.getenv ("username");
-        String ltAccessToken = System.getenv ("token");
-        String gridURL = "@mobile-hub.lambdatest.com/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities ();
-        capabilities.setCapability ("build", "Android apk tests");
-        capabilities.setCapability ("name", "Swag mobile app automation tests");
-        capabilities.setCapability ("platformName", platform);
-        capabilities.setCapability ("deviceName", device);
-        capabilities.setCapability ("platformVersion", version);
-        capabilities.setCapability ("appium:app", "lt://APP10011121654063254314917");
-        capabilities.setCapability ("isRealMobile", true);
-        capabilities.setCapability ("network", true);
-        capabilities.setCapability ("visual", true);
-        capabilities.setCapability ("console", true);
-        capabilities.setCapability ("devicelog", true);
-
-        driver.set (new AppiumDriver (new URL ("https://" + ltUserName + ":" + ltAccessToken + gridURL), capabilities));
+        final HashMap<String, Object> ltOptions = new HashMap<> ();
+        ltOptions.put ("build", "Android apk tests");
+        ltOptions.put ("name", "Swag mobile app automation tests");
+        ltOptions.put ("platformName", platform);
+        ltOptions.put ("deviceName", device);
+        ltOptions.put ("platformVersion", version);
+        ltOptions.put ("appium:app", "lt://APP10160341071754500059009313");
+        ltOptions.put ("isRealMobile", true);
+        ltOptions.put ("network", true);
+        ltOptions.put ("visual", true);
+        ltOptions.put ("console", true);
+        ltOptions.put ("devicelog", true);
+        capabilities.setCapability ("lt:options", ltOptions);
+        driver.set (new AppiumDriver (new URL ("https://" + LT_USERNAME + ":" + LT_ACCESS_KEY + URL), capabilities));
         setupBrowserTimeouts ();
 
     }
@@ -63,6 +65,6 @@ public class BaseTest {
     private void setupBrowserTimeouts () {
         getDriver ().manage ()
             .timeouts ()
-            .implicitlyWait (30, TimeUnit.SECONDS);
+            .implicitlyWait (Duration.ofSeconds (30));
     }
 }
