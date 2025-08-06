@@ -11,7 +11,7 @@
                 </methods>
             </class>
         </classes>
-    </test> <!-- Test -->
+    </test>
     <test name="Form Authentication Tests - Firefox" >
         <parameter name="browser" value="firefox"/>
         <parameter name="platform" value="WIN10"/>
@@ -22,7 +22,7 @@
                 </methods>
             </class>
         </classes>
-    </test> <!-- Test -->
+    </test>
     <test name="Swag Labs app test - Mobile Automation - Galaxy S9">
         <parameter name="platformName" value="ANDROID"/>
         <parameter name="device" value="Galaxy S9 Plus"/>
@@ -34,7 +34,7 @@
                 </methods>
             </class>
         </classes>
-    </test> <!-- Test -->
+    </test>
     <test name="Swag Labs app test - Mobile Automation - Galaxy S10">
         <parameter name="platformName" value="ANDROID"/>
         <parameter name="device" value="Galaxy S10"/>
@@ -46,6 +46,5 @@
                 </methods>
             </class>
         </classes>
-    </test> <!-- Test -->
-
-</suite> <!-- Suite -->
+    </test>
+</suite>
