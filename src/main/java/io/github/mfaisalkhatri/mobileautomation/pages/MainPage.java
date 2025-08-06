@@ -1,7 +1,8 @@
 package io.github.mfaisalkhatri.mobileautomation.pages;
 
-import io.appium.java_client.MobileBy;
-import org.openqa.selenium.By;
+import java.time.Duration;
+
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,24 +12,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * Created By Faisal Khatri on 01-06-2022
  */
 public class MainPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+    private final WebDriver     driver;
+    private final WebDriverWait wait;
 
     public MainPage (final WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver,30);
+        this.wait = new WebDriverWait (driver, Duration.ofSeconds (30));
     }
 
-    public WebElement menuIcon () {
-        return wait.until(ExpectedConditions.elementToBeClickable((MobileBy.AccessibilityId("test-Menu"))));
+    public void logout () {
+        menuIcon ().click ();
+        logoutLink ().click ();
     }
 
     public WebElement logoutLink () {
-        return wait.until(ExpectedConditions.elementToBeClickable((MobileBy.AccessibilityId("test-LOGOUT"))));
+        return wait.until (ExpectedConditions.elementToBeClickable (AppiumBy.accessibilityId ("test-LOGOUT")));
     }
 
-    public void logout() {
-        menuIcon().click();
-        logoutLink().click();
+    public WebElement menuIcon () {
+        return wait.until (ExpectedConditions.elementToBeClickable (AppiumBy.accessibilityId ("test-Menu")));
     }
 }
