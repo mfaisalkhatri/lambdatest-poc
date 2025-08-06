@@ -12,15 +12,15 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
 public class BaseTest {
 
-    public static        ThreadLocal<WebDriver> driver;
-    private static final String                 LT_ACCESS_KEY = System.getenv ("LT_ACCESS_KEY");
-    private static final String                 LT_USERNAME   = System.getenv ("LT_USERNAME");
-    private static final String                 URL           = "@hub.lambdatest.com/wd/hub";
+    public static        ThreadLocal<RemoteWebDriver> driver;
+    private static final String                       LT_ACCESS_KEY = System.getenv ("LT_ACCESS_KEY");
+    private static final String                       LT_USERNAME   = System.getenv ("LT_USERNAME");
+    private static final String                       URL           = "@hub.lambdatest.com/wd/hub";
 
     public BaseTest () {
         driver = new ThreadLocal<> ();
@@ -31,15 +31,18 @@ public class BaseTest {
     }
 
     @Parameters ({ "browser", "platform" })
-    @BeforeMethod
+    @BeforeClass
     public void setupBrowser (String browser, String platform) throws MalformedURLException {
         MutableCapabilities options;
 
         switch (browser.toLowerCase ()) {
             case "chrome":
+                final var chromePrefs = new HashMap<String, Object> ();
+                chromePrefs.put ("profile.password_manager_leak_detection", false);
                 ChromeOptions chromeOptions = new ChromeOptions ();
                 chromeOptions.setPlatformName (platform);
                 chromeOptions.setBrowserVersion ("latest");
+                chromeOptions.setExperimentalOption ("prefs", chromePrefs);
                 chromeOptions.setCapability ("LT:Options", getLTOptions (browser));
                 options = chromeOptions;
                 break;

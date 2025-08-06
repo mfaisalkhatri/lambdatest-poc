@@ -1,5 +1,8 @@
 package io.github.mfaisalkhatri.webautomation.tests;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,7 +11,6 @@ import io.github.mfaisalkhatri.webautomation.driversetup.BaseTest;
 import io.github.mfaisalkhatri.webautomation.pages.FormAuthentication;
 import io.github.mfaisalkhatri.webautomation.pages.MainPage;
 import io.github.mfaisalkhatri.webautomation.pages.SecurePage;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -35,30 +37,30 @@ public class FormAuthenticationTests extends BaseTest {
         formAuthenticationPage.login (userName, password);
 
         if (!isValid) {
-            Assert.assertTrue (formAuthenticationPage.getFlashMessage ()
+            assertTrue (formAuthenticationPage.getFlashMessage ()
                 .contains (" is invalid!"));
         } else {
-            Assert.assertTrue (securePage.getFlashMessage ()
+            assertTrue (securePage.getFlashMessage ()
                 .contains ("You logged into a secure area!"));
-            Assert.assertEquals (securePage.getHeaderText (), "Secure Area");
-            Assert.assertEquals (securePage.getSubHeaderText (),
+            assertEquals (securePage.getHeaderText (), "Secure Area");
+            assertEquals (securePage.getSubHeaderText (),
                 "Welcome to the Secure Area. When you are done click logout below.");
-            Assert.assertTrue (securePage.logoutBtn ()
+            assertTrue (securePage.logoutBtn ()
                 .isDisplayed ());
             securePage.logoutBtn ()
                 .click ();
-            Assert.assertTrue (formAuthenticationPage.getFlashMessage ()
+            assertTrue (formAuthenticationPage.getFlashMessage ()
                 .contains ("You logged out of the secure area!"));
         }
     }
-    
+
     @BeforeClass
     public void testSetup () {
         final String websiteLink = "http://the-internet.herokuapp.com/";
         driver.get ()
             .get (websiteLink);
-        MainPage mpage = new MainPage (getDriver ());
-        mpage.clickLink ("Form Authentication");
+        MainPage mainPage = new MainPage (getDriver ());
+        mainPage.clickLink ("Form Authentication");
         formAuthenticationPage = new FormAuthentication (getDriver ());
         securePage = new SecurePage (getDriver ());
     }

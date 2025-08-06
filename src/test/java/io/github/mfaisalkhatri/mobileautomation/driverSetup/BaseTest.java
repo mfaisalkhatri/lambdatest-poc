@@ -21,7 +21,7 @@ public class BaseTest {
     public static        ThreadLocal<AppiumDriver> driver;
     private static final String                    LT_ACCESS_KEY = System.getenv ("LT_ACCESS_KEY");
     private static final String                    LT_USERNAME   = System.getenv ("LT_USERNAME");
-    private static final String                    URL           = "@hub.lambdatest.com/wd/hub";
+    private static final String                    URL           = "@mobile-hub.lambdatest.com/wd/hub";
 
     public BaseTest () {
         driver = new ThreadLocal<> ();

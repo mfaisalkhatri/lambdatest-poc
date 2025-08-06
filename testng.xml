@@ -23,7 +23,7 @@
             </class>
         </classes>
     </test>
-    <test name="Swag Labs app test - Mobile Automation - Galaxy S9">
+    <test name="Swag Labs app test - Mobile Automation - Galaxy S23 Ultra">
         <parameter name="platformName" value="ANDROID"/>
         <parameter name="device" value="Galaxy S23 Ultra"/>
         <parameter name="version" value="14"/>
@@ -35,7 +35,7 @@
             </class>
         </classes>
     </test>
-    <test name="Swag Labs app test - Mobile Automation - Galaxy S10">
+    <test name="Swag Labs app test - Mobile Automation - Galaxy S22 Ultra 5G">
         <parameter name="platformName" value="ANDROID"/>
         <parameter name="device" value="Galaxy S22 Ultra 5G"/>
         <parameter name="version" value="15"/>
